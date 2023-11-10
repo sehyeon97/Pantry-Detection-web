@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Container } from "../styles/Home";
+import ImageContainer, { FileInput } from "../styles/ImageContainer";
+import Image from "../styles/Image";
 
 const UploadImage = () => {
 
     const [imageFile, setImageFile] = useState<File>();
-    const [previewImage, setPreviewImage] = useState<string | ArrayBuffer | null>();
+    const [previewImage, setPreviewImage] = useState<string | ArrayBuffer | null>(null);
 
     const fileHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
@@ -21,8 +23,10 @@ const UploadImage = () => {
 
     return (
         <Container>
-            <input type="file" onChange={fileHandler}/>
-            <img src={previewImage as string} alt="Preview" />
+            <ImageContainer>
+                <FileInput type="file" accept="image/*" onChange={fileHandler} />
+                <Image src={previewImage as string} alt="" />
+            </ImageContainer>
         </Container>
     );
 
